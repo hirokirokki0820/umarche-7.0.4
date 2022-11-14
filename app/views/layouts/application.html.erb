@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Devise704Tailwindcss</title>
+    <title>umarche</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -12,14 +12,15 @@
     <script src="https://kit.fontawesome.com/d8aa0fa532.js" crossorigin="anonymous"></script>
   </head>
 
-  <body>
+  <body data-controller="navbar">
     <div class="min-h-screen bg-gray-100">
-      <div class="container mx-auto px-8 py-3">
+      <%= render 'layouts/navigation' %>
+      <div class="mx-auto">
         <p class="notice"><%= notice %></p>
         <p class="alert"><%= alert %></p>
         <%= yield %>
         <% if Rails.env.development? %>
-          <div class="p-3 bg-gray-200 text-red-500 rounded">
+          <div class="my-5 p-3 bg-gray-200 text-red-500 rounded">
             <p class="sample sample-child"><%= debug(params) %></p>
             <p>セッションID => <%= session["warden.user.user.key"] %></p>
           </div>
