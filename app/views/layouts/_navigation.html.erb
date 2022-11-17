@@ -10,16 +10,11 @@
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
               <%= link_to "ホーム", root_path, class: "text-gray-700 border-b-4 border-white px-3 py-2 text-sm cursor-pointer #{current_page?(root_path) ? "border-indigo-600" : "hover:border-b-4 hover:border-gray-200"}", aria_current: "page" %>
+
+              <% if user_signed_in? %>
+                <%= link_to "カートを表示", cart_path, class: "text-gray-700 border-b-4 border-white px-3 py-2 text-sm cursor-pointer #{request.path.include?("cart") ? "border-indigo-600" : "hover:border-b-4 hover:border-gray-200"}" %>
+              <% end %>
               <!-- <a class="text-gray-700 border-b-4 border-white px-3 py-2 text-sm cursor-pointer <%= current_page?(root_path) ? "border-indigo-600" : "hover:border-b-4 hover:border-gray-200" %>" aria-current="page" data-navbar-target="menu" data-action="navbar#menuClick">ホーム</a> -->
-
-              <a class="text-gray-700 border-b-4 border-white px-3 py-2 text-sm cursor-pointer <%= request.path.include?("cart") ? "border-indigo-600" : "hover:border-b-4 hover:border-gray-200" %>"  data-navbar-target="menu" data-action="navbar#menuClick">カートを表示</a>
-
-              <%#= link_to "新規登録" ,new_user_registration_path, class: "not-active", data: { navbar_target: "menu", action: "navbar#menuClick" }  %>
-
-              <%#= link_to "ログイン" ,new_user_session_path, class: "not-active", data: { navbar_target: "menu", action: "navbar#menuClick" }  %>
-
-              <%#= link_to "パスワード再設定" ,new_user_password_path, class: "not-active", data: { navbar_target: "menu", action: "navbar#menuClick" }  %>
-
             </div>
           </div>
         </div>
@@ -48,9 +43,15 @@
                 <% if user_signed_in? %>
                   <%= link_to "プロフィール編集", edit_user_registration_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1", id: "user-menu-item-0" %>
                   <%= link_to "ログアウト", destroy_user_session_path, class: "block px-4 py-2 text-sm text-red-400 hover:bg-gray-100", role: "menuitem", tabindex: "-1", id: "user-menu-item-1", data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" } %>
+                <% elsif owner_signed_in? %>
+                  <%= link_to "オーナー情報の編集", edit_owner_registration_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1", id: "owner-menu-item-0" %>
+                  <%= link_to "ログアウト", destroy_owner_session_path, class: "block px-4 py-2 text-sm text-red-400 hover:bg-gray-100", role: "menuitem", tabindex: "-1", id: "owner-menu-item-1", data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" } %>
+                <% elsif admin_signed_in? %>
+                  <%= link_to "管理者アカウントの編集", edit_admin_registration_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1", id: "admin-menu-item-0" %>
+                  <%= link_to "ログアウト", destroy_admin_session_path, class: "block px-4 py-2 text-sm text-red-400 hover:bg-gray-100", role: "menuitem", tabindex: "-1", id: "admin-menu-item-1", data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" } %>
                 <% else %>
-                  <%= link_to "新規登録", new_user_registration_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1", id: "user-menu-item-0" %>
-                  <%= link_to "ログイン", new_user_session_path, class: "block px-4 py-2 text-sm text-green-600 hover:bg-gray-100", role: "menuitem", tabindex: "-1", id: "user-menu-item-1" %>
+                  <%= link_to "ユーザー新規登録", new_user_registration_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1", id: "user-menu-item-0" %>
+                  <%= link_to "ユーザーログイン", new_user_session_path, class: "block px-4 py-2 text-sm text-green-600 hover:bg-gray-100", role: "menuitem", tabindex: "-1", id: "user-menu-item-1" %>
                   <%= link_to "ゲストログイン", users_guest_sign_in_path, data: { turbo_method: :post }, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1", id: "user-menu-item-2" %>
                 <% end %>
               </div>

@@ -1,29 +1,67 @@
-<h2>Sign up</h2>
+<div class="mb-3 md:mt-10 md:w-2/3 md:mx-auto">
+  <h2 class="text-3xl mb-3 md:text-center"><%= icon_with_text("solid", "store", "店舗オーナーの登録") %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "owners/shared/error_messages", resource: resource %>
+  <%= form_with model: @owner, url: registration_path(resource_name), local: true, class: "bg-white px-6 py-5 rounded-md" do |f| %>
+    <%= render "owners/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <%# -------- 店舗オーナー名 -------- %>
+    <div class="mb-3">
+      <%= f.label :name, class: "font-semibold block p-1 required" %>
+      <div class="relative">
+        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+          <span class="text-gray-600">
+            <%= icon("solid", "store") %>
+          </span>
+        </div>
+        <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "abcde", class: "form-input" %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+    <%# -------- Eメールアドレス -------- %>
+    <div class="mb-3">
+      <%= f.label :email, class: "font-semibold block p-1 required" %>
+      <div class="relative">
+        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+          <span class="text-gray-600">
+            <%= icon("solid", "envelope") %>
+          </span>
+        </div>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input", placeholder: "email@example.com" %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <%# -------- パスワード -------- %>
+    <div class="mb-3">
+      <%= f.label :password, "パスワード (6文字以上)", class: "font-semibold block p-1 required" %>
+      <div class="relative">
+        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+          <span class="text-gray-600">
+            <%= icon("solid", "lock") %>
+          </span>
+        </div>
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-input" %>
+      </div>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+    <%# -------- パスワード（確認用） -------- %>
+    <div class="mb-5">
+      <%= f.label :password_confirmation, class: "font-semibold block p-1 required" %>
+      <div class="relative">
+        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+          <span class="text-gray-600">
+            <%= icon("solid", "lock") %>
+          </span>
+        </div>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-input" %>
+      </div>
+    </div>
 
-<%= render "owners/shared/links" %>
+    <div class="md:flex items-center md:justify-between">
+      <%= f.submit "登録する", class: "btn btn-sky mb-3 md:mb-0" %>
+      <div class="md:text-right text-sm">
+        <%= render "owners/shared/links" %>
+      </div>
+    </div>
+  <% end %>
+
+</div>
