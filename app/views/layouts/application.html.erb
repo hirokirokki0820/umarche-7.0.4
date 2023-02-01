@@ -22,7 +22,13 @@
         <% if Rails.env.development? %>
           <div class="my-5 p-3 bg-gray-200 text-red-500 rounded">
             <p class="sample sample-child"><%= debug(params) %></p>
-            <p>セッションID => <%= session["warden.user.user.key"] %></p>
+            <% if user_signed_in? %>
+              <p>セッションID => <%= session["warden.user.user.key"] %></p>
+            <% elsif owner_signed_in? %>
+              <p>セッションID => <%= session["warden.user.owner.key"] %></p>
+            <% elsif admin_signed_in? %>
+              <p>セッションID => <%= session["warden.user.admin.key"] %></p>
+            <% end %>
           </div>
         <% end %>
       </div>

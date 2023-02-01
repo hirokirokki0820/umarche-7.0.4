@@ -1,0 +1,29 @@
+<header class="bg-white shadow">
+  <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+      店舗情報
+    </h2>
+  </div>
+</header>
+
+<main>
+  <div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="p-6 bg-white border-b border-gray-200">
+          <div class="w-1/2 p-4">
+            <%= link_to edit_shop_path(@shop) do %>
+              <div class="border rounded-md p-4">
+                <div class="mb-4">
+                  <span class="border p-2 rounded-md bg-blue-400 text-white">販売中</span>
+                </div>
+                <div class="text-xl"><%= @shop.name %></div>
+                <%= image_tag "sample1.jpg" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

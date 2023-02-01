@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get "cart", to: "carts#index"
   resources :products
+  resources :shops
 
   devise_for :admins, controllers: {
     registrations: "admins/registrations",
